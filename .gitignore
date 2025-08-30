@@ -1,0 +1,13 @@
+# Binaries
+slidegen-server
+*.exe
+
+# Slides directory
+slides/
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

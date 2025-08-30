@@ -1,0 +1,18 @@
+# Production Dockerfile
+FROM node:18-alpine
+
+# Install reveal-md
+RUN npm install -g reveal-md
+
+WORKDIR /app
+
+# Copy pre-built Go binary (built locally for linux/amd64)
+COPY slidegen-server .
+RUN chmod +x slidegen-server
+
+# Create slides directory
+RUN mkdir -p slides
+
+EXPOSE 8081 1948
+
+CMD ["./slidegen-server"]
