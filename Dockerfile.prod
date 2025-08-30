@@ -1,8 +1,5 @@
-# Production Dockerfile
-FROM node:18-alpine
-
-# Install reveal-md
-RUN npm install -g reveal-md
+# Production Dockerfile - Lightweight version
+FROM alpine:latest
 
 WORKDIR /app
 
@@ -10,9 +7,9 @@ WORKDIR /app
 COPY slidegen-server .
 RUN chmod +x slidegen-server
 
-# Create slides directory
-RUN mkdir -p slides
+# Create static directory for HTML files
+RUN mkdir -p static
 
-EXPOSE 8081 1948
+EXPOSE 8081
 
 CMD ["./slidegen-server"]

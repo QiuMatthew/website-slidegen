@@ -1,23 +1,21 @@
-# Development Dockerfile
+# Development Dockerfile - Lightweight version
 FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
+COPY go.mod .
 COPY main.go .
 RUN go build -o slidegen-server main.go
 
-FROM node:18-alpine
-
-# Install reveal-md
-RUN npm install -g reveal-md
+FROM alpine:latest
 
 WORKDIR /app
 
 # Copy the Go server
 COPY --from=builder /app/slidegen-server .
 
-# Create slides directory
-RUN mkdir -p slides
+# Create static directory
+RUN mkdir -p static
 
-EXPOSE 8081 1948
+EXPOSE 8081
 
 CMD ["./slidegen-server"]
